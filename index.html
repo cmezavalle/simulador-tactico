@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Táctico Interactivo</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #191919;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        h1 { font-size: 1.2rem; margin: 5px 0; text-align: center; }
+        #toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+            justify-content: center;
+        }
+        button {
+            padding: 8px 12px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn-mode { background-color: #323232; }
+        .btn-mode.active { background-color: #3e8ce6; }
+        .btn-action { background-color: #b45a1e; }
+        .btn-reset { background-color: #b42828; }
+        .btn-file { background-color: #287850; }
+        
+        #canvas-container {
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 6px;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        canvas {
+            display: block;
+            background-color: #2b8a3e;
+            touch-action: none;
+        }
+        #notification {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: #ffff64;
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simulador Táctico - Porcentajes de Pase y Vectores</h1>
+    
+    <div id="toolbar">
+        <button class="btn-mode active" id="m1" onclick="setMode(1)">1: 1v1 y Marcas</button>
+        <button class="btn-mode" id="m2" onclick="setMode(2)">2: Pases y %</button>
+        <button class="btn-mode" id="m3" onclick="setMode(3)">3: Vectores Inteligentes</button>
+        <button class="btn-action" onclick="changeNumPlayers()">Jugadores: <span id="num-label">11</span>v<span id="num-label2">11</span></button>
+        <button class="btn-reset" onclick="resetBoard()">Reset</button>
+        <button class="btn-file" onclick="saveSession()">Guardar</button>
+        <button class="btn-file" onclick="loadSessionBtn()">Cargar</button>
+    </div>
+
+    <div id="canvas-container">
+        <div id="notification"></div>
+        <canvas id="pitchCanvas" width="1000" height="600"></canvas>
+    </div>
+
+    <input type="file" id="fileInput" style="display: none;" accept=".tac,.json" onchange="handleFileLoad(event)">
+
+    <script
+    src="script.js"
+    >  
+    </script>
+</body>
+</html>
